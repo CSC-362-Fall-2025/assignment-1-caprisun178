@@ -1,10 +1,29 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, char* argv[]){
-  int array[4];
-  for(int i=0; i <4; i++){
+  int n;
+
+  printf("Enter how many elements for the array: ");
+  if (scanf("%d", &n) != 1){
+    printf("Invalid Input \n");
+    return 1;
+  }
+  else if (n <= 0)
+  {
+     printf("Value cannot be less than or equal to 0. \n");
+    return 1;
+  }
+  
+  int *array = (int *)malloc((size_t)n * sizeof(int));
+  
+  for(int i=0; i <n; i++){
     printf("Enter an integer value: ");
-    scanf("%d", &array[i]);
+    if(scanf("%d", &array[i]) != 1){
+      printf("Invalid Input");
+      free(array);
+      return 1;
+    }
   }
 
   printf("Current array: \n");
@@ -12,17 +31,12 @@ int main(int argc, char* argv[]){
     printf("array[%d] = %d\n", i, array[i]);
   }
 
-  int reverseArray[4];
-  int j =0;
-  for(int i=3; i >=0; i--){
-    reverseArray[j] = array[i];
-    j++;
+  printf("Reverse array: \n");
+  for(int i=n-1; i >=0; i--){
+    printf("%d\n", array[i]);
   }
 
- printf("Reverse array: \n");
-  for(int i=0; i <4; i++){
-    printf("reverseArray[%d] = %d\n", i, reverseArray[i]);
-  }
+
 
   return 0;
 }
